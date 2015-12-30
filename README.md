@@ -58,13 +58,13 @@ Download and install Jarvis Voice Command Desktop Application by visiting [voice
 Once you've opened the application, Jarvis constantly listens for his name in the background.  Activate the command listener by saying "Jarvis" (you can customize his name in Settings.)  Listen for the bleep confirmation then say a command.
 
 Example:
-<pre><code>
-Jarvis
+
+<pre><code>Jarvis
 </code></pre>
 
 Listen for the bleep confirmation
-<pre><code>
-What time is it?
+
+<pre><code>What time is it?
 </code></pre>
 
 For additional usage information, see our [How To Use](link to Andres's doc) guide
