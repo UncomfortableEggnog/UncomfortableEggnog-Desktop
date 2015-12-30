@@ -1,4 +1,4 @@
-# Jarvis V.0.0.1 Beta
+# Jarvis v.0.0.1 Beta
 
 > Jarvis is a voice command desktop application for Mac OS.  With Jarvis, you can control your computer with your voice.  Jarvis comes with a core command package that lets you adjust volume, brightness, text size, open applications, check the weather, look up documents on Wikipedia, get driving directions, etc.  For a full list of core commands, see [Core Commands](#Core-Commands).
 >
