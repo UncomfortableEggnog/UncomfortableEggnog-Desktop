@@ -26,7 +26,6 @@ module.exports.loadPackage = function (configObj, cb) {
       console.log('error in buildCommands');
       cb(err);
     } else {
-      console.log('got commandsObj, ', commandsObj);
       initPhrases(commandsObj, function (err, commandsObj) {
         if (err) {
           console.log('error in initPhrases');
