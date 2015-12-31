@@ -24,10 +24,10 @@ module.exports = function (grunt) {
         stderr: false
       },
       build: {
-        command: 'electron-packager . Jarvis --platform=darwin --arch=x64 --version=0.35.4 --icon=./app/assets/icons/jarvis.icns --overwrite; cp ./app/assets/icons/jarvis.icns ./Jarvis-darwin-x64/Jarvis.app/Contents/Resources/atom.icns'
+        command: 'webpack .;electron-packager . Jarvis --platform=darwin --arch=x64 --version=0.35.4 --icon=./app/assets/icons/jarvis.icns --overwrite; cp ./app/assets/icons/jarvis.icns ./Jarvis-darwin-x64/Jarvis.app/Contents/Resources/atom.icns'
       },
       dev: {
-        command: 'NODE_ENV=DEV electron .'
+        command: 'webpack .;cat ./app/configCTRL/config.json > ./app/configCTRL/config-dev.json;NODE_ENV=DEV electron .'
       }
     }
   });
