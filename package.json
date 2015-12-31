@@ -74,6 +74,7 @@
     "node-sass": "^3.4.2",
     "node-stopwatch": "0.0.1",
     "sass-loader": "^3.1.2",
+    "sinon": "^1.17.2",
     "supertest": "^1.1.0",
     "webpack-target-electron-renderer": "^0.2.0"
   }

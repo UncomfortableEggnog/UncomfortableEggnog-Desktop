@@ -22,7 +22,6 @@ describe('Matching', function (done) {
     done();
   });
   it('should match added phrases', function (done) {
-    phrases['kyle cho pro tip'].push('Kyles cho pros tips');
     var addedPhrase = testPhrases(phrases, 'Kyles cho pros tips');
     expect(addedPhrase).to.equal('kyle cho pro tip');
     done();
@@ -30,14 +29,13 @@ describe('Matching', function (done) {
   it('should match phonetics', function (done) {
     for (var phrase in testCases) {
       for (var i = 0; i < testCases[phrase].length; i++) {
-        console.log('\n\n');
         var userInput = testCases[phrase][i].term;
         if (testCases[phrase][i].score > 0.4) {
           var guess = getMatchByScore(Object.keys(testCases), userInput);
-          console.log('\n\n');
-          console.log('WebSpeechAPI score: ', testCases[phrase][i].score);
-          console.log("should match: ", phrase);
-          console.log('guessing: ', guess);
+          // console.log('\n\n');
+          // console.log('WebSpeechAPI score: ', testCases[phrase][i].score);
+          // console.log("should match: ", phrase);
+          // console.log('guessing: ', guess);
           expect(guess).to.equal(phrase);
         }
       }
