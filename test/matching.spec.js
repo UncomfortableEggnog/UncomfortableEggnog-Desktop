@@ -16,6 +16,16 @@ GLOBAL.localStorage = {
     this.storage = {};
   }
 };
+/*
+mock data
+*/
+localStorage.setItem('appPath', __dirname);
+var config = {
+  "phrasesPath": __dirname + '/tmp/phrases.json',
+  "commandsPath": __dirname + '/tmp/commands.json',
+  "exactMatchThreshold": "0.8",
+  "closeMatchThreshold": "0.66",
+  "name": "Jarvis" };
 var fs = require('fs');
 var expect = require('chai').expect;
 var matching = require('../app/matchCTRL/matchingUtil');
@@ -25,16 +35,6 @@ var phoneticsTest = require('../app/matchCTRL/testers/phoneticsTest');
 var getMatchByScore = require('../app/matchCTRL/testers/getMatchByScore');
 var commandsUtil = require('../app/commandsCTRL/commandsCTRL');
 var utils = require('../app/utils/utils');
-/*
-  mock data
-*/
-localStorage.setItem('appPath', __dirname);
-var config = {
-  "phrasesPath": __dirname + '/tmp/phrases.json',
-  "commandsPath": __dirname + '/tmp/commands.json',
-  "exactMatchThreshold": "0.8",
-  "closeMatchThreshold": "0.66",
-  "name": "Jarvis" };
 
 var testCases = require('./tmp/matching-test-cases');
 
@@ -53,13 +53,7 @@ describe('Matching', function (done) {
   });
   it('should match exact commands', function (done) {
     var obj = matching('google', 'hello', commandsObj);
-    console.log(obj);
     expect(obj).to.be.an('object');
-    done();
-  });
-  it('should match added phrases', function (done) {
-    var addedPhrase = testPhrases(phrases, 'Kyles cho pros tips');
-    expect(addedPhrase).to.equal('kyle cho pro tip');
     done();
   });
   it('should match phonetics', function (done) {

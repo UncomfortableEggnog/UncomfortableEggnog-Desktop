@@ -11,6 +11,7 @@ var utils = require('../utils/utils');
 
 
 module.exports = function (actionPrefix, variable, commandsObj) {
+  console.log('matching');
   var _actionPrefix = actionPrefix.toLowerCase();
   var actionObj = {};
   actionObj.exact = false;

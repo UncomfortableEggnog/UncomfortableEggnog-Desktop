@@ -105,7 +105,6 @@ function buildArgumentSyntax (argStr, argParams) {
   }
 
   argStr = varArr.join(argParams['del']);
-  console.log('GENERATED VARIABLE: ', argStr);
   return argStr;
 }
 
@@ -131,7 +130,6 @@ module.exports = function (actionPrefix, actionObj, variable, commandsObj) {
     for (var i = 0; i < varArr.length; i++) {
       var varFragment = buildArgumentSyntax(varArr[i], args[0]);
       _action += bash.replace(_argSyntax, varFragment) + ';';
-      console.log('chainsynced results:', _action);
     }
     return _action;
   } else {
@@ -143,7 +141,6 @@ module.exports = function (actionPrefix, actionObj, variable, commandsObj) {
   //EX: variable = "Berkeley to Los Angeles" => 2 args
   // _action += bashStrs[i] || "" + build;
     if (args[i]['chainkey']) {
-      console.log('found a chainkey');
   //get keyword to separate next argument.
       var chainkey = args[i]['chainkey'];
   //split entire string then extract first element on chain.
@@ -157,18 +154,7 @@ module.exports = function (actionPrefix, actionObj, variable, commandsObj) {
     var bashVariable = buildArgumentSyntax(varStr, args[i]);
     bash = bash.replace(_argSyntax, bashVariable);
       _action = bash;
-      console.log('remaining variable: ', variable);
     }
-    console.log(_action);
     return _action;
   }
-  // } else {
 };
-
-
-
-  // var _action = bash.replace(_argSyntax, variable);
-//   console.log("results: ", _action);
-//   }
-//   return _action;
-// // };

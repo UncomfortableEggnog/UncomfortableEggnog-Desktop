@@ -10,7 +10,6 @@ if (process.env.NODE_ENV === 'DEV') {
 }
 
 var getConfig = function (cb) {
-  // console.log('configPath, ', configPath);
   fs.readFile(configPath, 'utf8', function (err, data) {
     if (err) {
       cb(err);
