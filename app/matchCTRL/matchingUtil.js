@@ -11,7 +11,6 @@ var utils = require('../utils/utils');
 
 
 module.exports = function (actionPrefix, variable, commandsObj) {
-  console.log('matching');
   var _actionPrefix = actionPrefix.toLowerCase();
   var actionObj = {};
   actionObj.exact = false;
@@ -49,6 +48,18 @@ module.exports = function (actionPrefix, variable, commandsObj) {
     return actionObj;
   }
 
+  /**
+   * findCommand
+   *
+   * looks in the phrases trie for a known match that jarvis had previously added
+   * for instance, if we tell Jarvis to match 'Gaucho protip' to 'Kyle Cho Pro Tip'
+   * when we invoke findCommand with the phrase trie and 'Gaucho protip' it will
+   * return 'Kyle Cho Pro Tip'
+   *
+   * @param {object} phrases -  Phrases trie
+   * @param {string} _actionPrefix -  user supplied term
+   * @return {string} - if in phrase trie, return string
+   */
   var addedPhraseTest = findCommand(phrases, _actionPrefix);
 
   if (addedPhraseTest) {
@@ -61,14 +72,26 @@ module.exports = function (actionPrefix, variable, commandsObj) {
     }
 
   } else {
-    var key = getMatchByScore(Object.keys(actions), _actionPrefix);
-    actionObj.exact = false;
-    actionObj.guessedCommand = key;
+    /**
+     * getMatchByScore
+     *
+     * Will pass in an array of commands and a user supplied term
+     * and will return out string with the highest chance of being the correct match
+     *
+     * @param {array} commands -  array of known commands
+     * @param {string} _actionPrefix -  user supplied command
+     * @return {string} - command with the highest match score
+     */
+    var key = getMatchByScore(Object.keys(actions), _actionPrefix, closeMatchThreshold);
+    if (key !== null) {
+      actionObj.exact = false;
+      actionObj.guessedCommand = key;
 
-    if (variable && argCommands[key]) {
-      actionObj.action = formatVariable(argCommands[key], variable, commandsObj);
-    } else {
-      actionObj.action = exactCommands[key];
+      if (variable && argCommands[key]) {
+        actionObj.action = formatVariable(argCommands[key], variable, commandsObj);
+      } else {
+        actionObj.action = exactCommands[key];
+      }
     }
 
   }

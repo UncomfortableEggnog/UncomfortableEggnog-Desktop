@@ -1,10 +1,17 @@
 var phoneticsTest = require('./phoneticsTest');
 
-module.exports = function (phrases, actionPrefix) {
-  // console.log('\n\n\n\n');
-  // console.log('Testing: ', actionPrefix);
-  // console.log('\n\n');
-  return phrases.reduce(function (max, phrase) {
+/**
+ * getMatchByScore - reduces over an array of commands, and
+ * keeps the highest scoring phrase
+ *
+ * @param {array} phrases - array of known commands
+ * @param {string} actionPrefix - user supplied command
+ * @return {string}
+ */
+
+
+module.exports = function (phrases, actionPrefix, score) {
+  var match = phrases.reduce(function (max, phrase) {
     if (max.score === undefined) {
       max.phrase = phrase;
       max.score = phoneticsTest(phrase, actionPrefix);
@@ -16,5 +23,6 @@ module.exports = function (phrases, actionPrefix) {
         score: score
       };
     }
-  }, {})['phrase'];
+  }, {});
+  return match.score > score ? match.phrase : null;
 };

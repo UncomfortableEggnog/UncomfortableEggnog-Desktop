@@ -16,7 +16,6 @@ var rootPath = localStorage.getItem('appPath');
   Saves the command object in localStorage and then fs.writeFiles it.
 */
 
-
 module.exports.loadPackage = function (configObj, cb) {
   var commandsPath = configObj.commandsPath;
   buildCommands(commandsPath, function (err, commandsObj) {
