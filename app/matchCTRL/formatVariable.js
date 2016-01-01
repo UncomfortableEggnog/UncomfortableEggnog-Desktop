@@ -1,14 +1,13 @@
-/**
-   * formatVariable
-   * ===========
-   *
-   * Takes an input (command) actionPrefix and variable string.
-   * Looks up command in argCommands object and returns the variable
-   * with the correct delimiter syntax.
-   *
-   *  EX: formatVariable('check the', 'name of US president') //=> 'name+of+US+president'
-   *
-* */
+//
+//  formatVariable
+//  ===========
+//
+//  Takes an input (command) actionPrefix and variable string.
+//  Looks up command in argCommands object and returns the variable
+//  with the correct delimiter syntax.
+//
+//   EX: formatVariable('check the', 'name of US president') //=> 'name+of+US+president'
+//
 
 //test actionObj ==> need to pass this in
 // var actionObj =
@@ -105,7 +104,6 @@ function buildArgumentSyntax (argStr, argParams) {
   }
 
   argStr = varArr.join(argParams['del']);
-  console.log('GENERATED VARIABLE: ', argStr);
   return argStr;
 }
 
@@ -131,7 +129,6 @@ module.exports = function (actionPrefix, actionObj, variable, commandsObj) {
     for (var i = 0; i < varArr.length; i++) {
       var varFragment = buildArgumentSyntax(varArr[i], args[0]);
       _action += bash.replace(_argSyntax, varFragment) + ';';
-      console.log('chainsynced results:', _action);
     }
     return _action;
   } else {
@@ -143,7 +140,6 @@ module.exports = function (actionPrefix, actionObj, variable, commandsObj) {
   //EX: variable = "Berkeley to Los Angeles" => 2 args
   // _action += bashStrs[i] || "" + build;
     if (args[i]['chainkey']) {
-      console.log('found a chainkey');
   //get keyword to separate next argument.
       var chainkey = args[i]['chainkey'];
   //split entire string then extract first element on chain.
@@ -157,18 +153,7 @@ module.exports = function (actionPrefix, actionObj, variable, commandsObj) {
     var bashVariable = buildArgumentSyntax(varStr, args[i]);
     bash = bash.replace(_argSyntax, bashVariable);
       _action = bash;
-      console.log('remaining variable: ', variable);
     }
-    console.log(_action);
     return _action;
   }
-  // } else {
 };
-
-
-
-  // var _action = bash.replace(_argSyntax, variable);
-//   console.log("results: ", _action);
-//   }
-//   return _action;
-// // };

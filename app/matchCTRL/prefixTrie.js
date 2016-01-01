@@ -1,3 +1,6 @@
+// Prefix Trie
+// wrapper for natural prefixTrie
+
 var natural = require('natural');
 var Trie = natural.Trie;
 

@@ -1,6 +1,6 @@
-/*
-  commandsUtil creates the object where command and phrases are defined
-*/
+
+//commandsUtil creates the object where command and phrases are defined
+
 
 var fs = require('fs');
 var updateCommandObj = require('./updateCommands');
@@ -12,27 +12,22 @@ var saveAndWrite = require('./saveAndWrite');
 var addPhrase = require('../utils/phraseTrie').addPhrase;
 var rootPath = localStorage.getItem('appPath');
 
-/*
-  Saves the command object in localStorage and then fs.writeFiles it.
-*/
+
+//Saves the command object in localStorage and then fs.writeFiles it.
 
 
 module.exports.loadPackage = function (configObj, cb) {
-  console.log('loadedPackage');
   var commandsPath = configObj.commandsPath;
   buildCommands(commandsPath, function (err, commandsObj) {
-    console.log('built commands');
     if (err) {
       console.log('error in buildCommands');
       cb(err);
     } else {
-      console.log('got commandsObj, ', commandsObj);
       initPhrases(commandsObj, function (err, commandsObj) {
         if (err) {
           console.log('error in initPhrases');
         }
         saveAndWrite(commandsObj, function (err, data) {
-          console.log('saved?');
           if (err) {
             cb(err);
           } else {

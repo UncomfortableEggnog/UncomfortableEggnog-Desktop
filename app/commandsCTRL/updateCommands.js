@@ -1,7 +1,5 @@
-/*
-  takes an existing commandObj or builds a new one
-  takes the package, and extends it
-*/
+// takes an existing commandObj or builds a new one
+// takes the package, and extends it
 var _ = require('underscore');
 var lowerCaseProps = require('../utils/utils').lowerCaseProps;
 var parseCommands = require('../matchCTRL/parseCommands').parseCommands;

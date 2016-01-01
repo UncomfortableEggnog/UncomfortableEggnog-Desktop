@@ -4,7 +4,6 @@ var addPhrase = require('../app/utils/phraseTrie').addPhrase;
 var findCommand = require('../app/utils/phraseTrie').findCommand;
 var fs = require('fs');
 var _ = require('underscore');
-// var coreUtils = JSON.parse(fs.readFileSync(__dirname + '/../packages/newcommands.json'));
 var coreUtils = require('../app/packages/core-utils');
 coreUtils = _.extend(coreUtils, {
   "apple": "aple",
@@ -13,8 +12,6 @@ coreUtils = _.extend(coreUtils, {
   "apd": "sad"
 });
 
-
-
 describe('Phrase trie', function (done) {
   var phraseTrie;
   before(function (done) {
@@ -22,7 +19,6 @@ describe('Phrase trie', function (done) {
     for (var command in coreUtils) {
       addPhrase(phraseTrie, command, command);
     }
-    console.log(JSON.stringify(phraseTrie, null, 2));
     done();
   });
   it('should fetch known commands', function (done) {

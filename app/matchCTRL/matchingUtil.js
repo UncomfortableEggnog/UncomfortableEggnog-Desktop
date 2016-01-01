@@ -1,7 +1,7 @@
 var fs = require('fs');
 var natural = require('natural');
 var formatVariable = require('./formatVariable');
-var testPhrases = require('./testers/testPhrases');
+var testCommands = require('./testers/testCommands');
 var getMatchByScore = require('./testers/getMatchByScore');
 var phoneticsTest = require('./testers/phoneticsTest');
 var JWDTest = require('./testers/JWDTest');
@@ -17,26 +17,21 @@ module.exports = function (actionPrefix, variable, commandsObj) {
   actionObj.userCommand = actionPrefix;
   actionObj.guessedCommand = null;
   actionObj.action = '';
-  /*
-    Mocking localStorage when in test env.
-  */
+  //  Mocking localStorage when in test env.
   if (process.env.NODE_ENV !== 'test') {
     var exactMatchThreshold = parseFloat(utils.get('exactMatchThreshold'));
     var closeMatchThreshold = parseFloat(utils.get('closeMatchThreshold'));
   } else {
-    console.log('test');
     var exactMatchThreshold = 0.8;
-    var closeMatchThreshold = 0.65;
+    var closeMatchThreshold = 0.5;
   }
 
-  /*
-    Destructuring the commandsObj
-  */
+  //  Destructuring the commandsObj
   var phrases = commandsObj.phrases;
   var actions = commandsObj.rawCommands;
   var argCommands = commandsObj.parsedCommands.argCommands;
   var exactCommands = commandsObj.parsedCommands.exactCommands;
-  var testPhrase = testPhrases(actions, _actionPrefix);
+  var testPhrase = testCommands(actions, _actionPrefix);
 
   if (actions[_actionPrefix] !== undefined || actions[testPhrase]) {
     actionObj.exact = true;
@@ -48,6 +43,18 @@ module.exports = function (actionPrefix, variable, commandsObj) {
     return actionObj;
   }
 
+  //
+  // findCommand
+  //
+  // looks in the phrases trie for a known match that jarvis had previously added
+  // for instance, if we tell Jarvis to match 'Gaucho protip' to 'Kyle Cho Pro Tip'
+  // when we invoke findCommand with the phrase trie and 'Gaucho protip' it will
+  // return 'Kyle Cho Pro Tip'
+  //
+  // @param {object} phrases -  Phrases trie
+  // @param {string} _actionPrefix -  user supplied term
+  // @return {string} - if in phrase trie, return string
+  //
   var addedPhraseTest = findCommand(phrases, _actionPrefix);
 
   if (addedPhraseTest) {
@@ -60,14 +67,26 @@ module.exports = function (actionPrefix, variable, commandsObj) {
     }
 
   } else {
-    var key = getMatchByScore(Object.keys(actions), _actionPrefix);
-    actionObj.exact = false;
-    actionObj.guessedCommand = key;
-
-    if (variable && argCommands[key]) {
-      actionObj.action = formatVariable(argCommands[key], variable, commandsObj);
-    } else {
-      actionObj.action = exactCommands[key];
+    //
+    // getMatchByScore
+    //
+    //   Will pass in an array of commands and a user supplied term
+    //   and will return out string with the highest chance of being the correct match
+    //
+    //   @param {array} commands -  array of known commands
+    //   @param {string} _actionPrefix -  user supplied command
+    //   @return {string} - command with the highest match score
+    //
+    console.log(closeMatchThreshold);
+    var key = getMatchByScore(Object.keys(actions), _actionPrefix, closeMatchThreshold);
+    if (key !== '') {
+      actionObj.exact = false;
+      actionObj.guessedCommand = key;
+      if (variable && argCommands[key]) {
+        actionObj.action = formatVariable(argCommands[key], variable, commandsObj);
+      } else {
+        actionObj.action = exactCommands[key];
+      }
     }
 
   }
