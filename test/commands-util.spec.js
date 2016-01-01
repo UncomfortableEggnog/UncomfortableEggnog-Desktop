@@ -2,6 +2,7 @@ var expect = require('chai').expect;
 var sinon = require('sinon');
 var fs = require('fs');
 var del = require('del');
+var _ = require('underscore');
 /*
   mock localStorage
 */
@@ -31,10 +32,10 @@ var config = {
   "closeMatchThreshold": "0.66",
   "name": "Jarvis" };
 var extraCommands = {
-  "blah blah": "osascript -e 'tell application \"System Events\"" +
+  "wut wut": "osascript -e 'tell application \"System Events\"" +
   "to repeat 2 times' -e 'key code 24 using {command down}'" +
   " -e 'delay 0.1' -e 'end repeat'",
-  "dah dah": "osascript -e 'tell application \"System Events\"" +
+  "woot woot": "osascript -e 'tell application \"System Events\"" +
   " to repeat 2 times' -e 'key code 27 using {command down}'" +
   " -e 'delay 0.1' -e 'end repeat'" };
 
@@ -62,6 +63,19 @@ describe('commands util', function (done) {
     expect(newCommandsObj).to.deep.equal(commandsObj);
   });
   it('should allow user to add new commands', function (done) {
-    done();
+    var old = utils.getCommands();
+    var newPackage = _.extend(old.packageCommands, extraCommands);
+    commandsUtil.updateCommands(newPackage, function (err, data) {
+      expect(data).to.have.property('woot woot');
+      done();
+    });
+  });
+  it('should allow user to delete commands', function (done) {
+    var old = utils.getCommands();
+    delete old.packageCommands['woot woot'];
+    commandsUtil.updateCommands(old.packageCommands, function (err, data) {
+      expect(data).to.have.not.property('woot woot');
+      done();
+    });
   });
 });

@@ -24,7 +24,6 @@ module.exports = function (actionPrefix, variable, commandsObj) {
     var exactMatchThreshold = parseFloat(utils.get('exactMatchThreshold'));
     var closeMatchThreshold = parseFloat(utils.get('closeMatchThreshold'));
   } else {
-    console.log('test');
     var exactMatchThreshold = 0.8;
     var closeMatchThreshold = 0.5;
   }
