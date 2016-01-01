@@ -84,7 +84,7 @@ module.exports = function (actionPrefix, variable, commandsObj) {
      */
     console.log(closeMatchThreshold);
     var key = getMatchByScore(Object.keys(actions), _actionPrefix, closeMatchThreshold);
-    if (key !== null) {
+    if (key !== '') {
       actionObj.exact = false;
       actionObj.guessedCommand = key;
       if (variable && argCommands[key]) {
