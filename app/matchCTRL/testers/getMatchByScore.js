@@ -10,7 +10,7 @@ var phoneticsTest = require('./phoneticsTest');
  */
 
 
-module.exports = function (phrases, actionPrefix, score) {
+module.exports = function (phrases, actionPrefix, closeMatchThreshold) {
   var match = phrases.reduce(function (max, phrase) {
     if (max.score === undefined) {
       max.phrase = phrase;
@@ -24,5 +24,5 @@ module.exports = function (phrases, actionPrefix, score) {
       };
     }
   }, {});
-  return match.score > score ? match.phrase : null;
+  return match.score > closeMatchThreshold ? match.phrase : '';
 };

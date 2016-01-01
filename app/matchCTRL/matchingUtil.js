@@ -1,7 +1,7 @@
 var fs = require('fs');
 var natural = require('natural');
 var formatVariable = require('./formatVariable');
-var testPhrases = require('./testers/testPhrases');
+var testCommands = require('./testers/testCommands');
 var getMatchByScore = require('./testers/getMatchByScore');
 var phoneticsTest = require('./testers/phoneticsTest');
 var JWDTest = require('./testers/JWDTest');
@@ -26,7 +26,7 @@ module.exports = function (actionPrefix, variable, commandsObj) {
   } else {
     console.log('test');
     var exactMatchThreshold = 0.8;
-    var closeMatchThreshold = 0.65;
+    var closeMatchThreshold = 0.5;
   }
 
   /*
@@ -36,7 +36,7 @@ module.exports = function (actionPrefix, variable, commandsObj) {
   var actions = commandsObj.rawCommands;
   var argCommands = commandsObj.parsedCommands.argCommands;
   var exactCommands = commandsObj.parsedCommands.exactCommands;
-  var testPhrase = testPhrases(actions, _actionPrefix);
+  var testPhrase = testCommands(actions, _actionPrefix);
 
   if (actions[_actionPrefix] !== undefined || actions[testPhrase]) {
     actionObj.exact = true;
@@ -82,11 +82,11 @@ module.exports = function (actionPrefix, variable, commandsObj) {
      * @param {string} _actionPrefix -  user supplied command
      * @return {string} - command with the highest match score
      */
+    console.log(closeMatchThreshold);
     var key = getMatchByScore(Object.keys(actions), _actionPrefix, closeMatchThreshold);
     if (key !== null) {
       actionObj.exact = false;
       actionObj.guessedCommand = key;
-
       if (variable && argCommands[key]) {
         actionObj.action = formatVariable(argCommands[key], variable, commandsObj);
       } else {

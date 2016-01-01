@@ -13,7 +13,7 @@ module.exports = {
             "term": "Kyoto Protocol"
         },
         {
-            "score": 0.6,
+            "score": 0.1,
             "term": "Township Road 10"
         },
         {
@@ -28,15 +28,15 @@ module.exports = {
         },
         {
             "score": 0.9855742454528809,
-            "term": "check the weather in San Francisco"
+            "term": "check the weather in San Fransisco"
         },
         {
             "score": 0.9855742454528809,
-            "term": "check the weather in San Francisco"
+            "term": "check the weather in San Francheska"
         },
         {
             "score": 0.9855742454528809,
-            "term": "check the weather in San Francisco"
+            "term": "check the whether in San fridge co"
         },
         {
             "score": 0.9855742454528809,
@@ -50,7 +50,7 @@ module.exports = {
     "dim screen": [
         {
             "score": 0.9531483054161072,
-            "term": "dim screen"
+            "term": "DM screen"
         },
         {
             "score": 0.9876290559768677,
@@ -93,19 +93,19 @@ module.exports = {
         },
         {
             "score": 0.9876290559768677,
-            "term": "tell me a funny joke"
+            "term": "tell me a funny jokes"
         },
         {
             "score": 0.9876290559768677,
-            "term": "tell me a funny joke"
+            "term": "tells me a funny joke"
         },
         {
             "score": 0.9876290559768677,
-            "term": "tell me a funny joke"
+            "term": "tell mine a funny joke"
         },
         {
             "score": 0.9876290559768677,
-            "term": "tell me a funny joke"
+            "term": "tell me a furry joke"
         }
     ],
     "dance yourself clean": [
