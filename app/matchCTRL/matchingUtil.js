@@ -17,9 +17,7 @@ module.exports = function (actionPrefix, variable, commandsObj) {
   actionObj.userCommand = actionPrefix;
   actionObj.guessedCommand = null;
   actionObj.action = '';
-  /*
-    Mocking localStorage when in test env.
-  */
+  //  Mocking localStorage when in test env.
   if (process.env.NODE_ENV !== 'test') {
     var exactMatchThreshold = parseFloat(utils.get('exactMatchThreshold'));
     var closeMatchThreshold = parseFloat(utils.get('closeMatchThreshold'));
@@ -28,9 +26,7 @@ module.exports = function (actionPrefix, variable, commandsObj) {
     var closeMatchThreshold = 0.5;
   }
 
-  /*
-    Destructuring the commandsObj
-  */
+  //  Destructuring the commandsObj
   var phrases = commandsObj.phrases;
   var actions = commandsObj.rawCommands;
   var argCommands = commandsObj.parsedCommands.argCommands;
@@ -47,18 +43,18 @@ module.exports = function (actionPrefix, variable, commandsObj) {
     return actionObj;
   }
 
-  /**
-   * findCommand
-   *
-   * looks in the phrases trie for a known match that jarvis had previously added
-   * for instance, if we tell Jarvis to match 'Gaucho protip' to 'Kyle Cho Pro Tip'
-   * when we invoke findCommand with the phrase trie and 'Gaucho protip' it will
-   * return 'Kyle Cho Pro Tip'
-   *
-   * @param {object} phrases -  Phrases trie
-   * @param {string} _actionPrefix -  user supplied term
-   * @return {string} - if in phrase trie, return string
-   */
+  //
+  // findCommand
+  //
+  // looks in the phrases trie for a known match that jarvis had previously added
+  // for instance, if we tell Jarvis to match 'Gaucho protip' to 'Kyle Cho Pro Tip'
+  // when we invoke findCommand with the phrase trie and 'Gaucho protip' it will
+  // return 'Kyle Cho Pro Tip'
+  //
+  // @param {object} phrases -  Phrases trie
+  // @param {string} _actionPrefix -  user supplied term
+  // @return {string} - if in phrase trie, return string
+  //
   var addedPhraseTest = findCommand(phrases, _actionPrefix);
 
   if (addedPhraseTest) {
@@ -71,16 +67,16 @@ module.exports = function (actionPrefix, variable, commandsObj) {
     }
 
   } else {
-    /**
-     * getMatchByScore
-     *
-     * Will pass in an array of commands and a user supplied term
-     * and will return out string with the highest chance of being the correct match
-     *
-     * @param {array} commands -  array of known commands
-     * @param {string} _actionPrefix -  user supplied command
-     * @return {string} - command with the highest match score
-     */
+    //
+    // getMatchByScore
+    //
+    //   Will pass in an array of commands and a user supplied term
+    //   and will return out string with the highest chance of being the correct match
+    //
+    //   @param {array} commands -  array of known commands
+    //   @param {string} _actionPrefix -  user supplied command
+    //   @return {string} - command with the highest match score
+    //
     console.log(closeMatchThreshold);
     var key = getMatchByScore(Object.keys(actions), _actionPrefix, closeMatchThreshold);
     if (key !== '') {

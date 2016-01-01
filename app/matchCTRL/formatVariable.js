@@ -1,14 +1,13 @@
-/**
-   * formatVariable
-   * ===========
-   *
-   * Takes an input (command) actionPrefix and variable string.
-   * Looks up command in argCommands object and returns the variable
-   * with the correct delimiter syntax.
-   *
-   *  EX: formatVariable('check the', 'name of US president') //=> 'name+of+US+president'
-   *
-* */
+//
+//  formatVariable
+//  ===========
+//
+//  Takes an input (command) actionPrefix and variable string.
+//  Looks up command in argCommands object and returns the variable
+//  with the correct delimiter syntax.
+//
+//   EX: formatVariable('check the', 'name of US president') //=> 'name+of+US+president'
+//
 
 //test actionObj ==> need to pass this in
 // var actionObj =

@@ -1,8 +1,7 @@
-/*
-  A function that takes advantange of JS's passing objects by reference.
-  Adds the commands one by one into the datastructure. Because we are editing by reference
-  we can then return the original object and it will be updated.
-*/
+
+  // A function that takes advantange of JS's passing objects by reference.
+  // Adds the commands one by one into the datastructure. Because we are editing by reference
+  // we can then return the original object and it will be updated.
 
 var PhraseTrie = require('../utils/phraseTrie').PhraseTrie;
 var addPhrase = require('../utils/phraseTrie').addPhrase;

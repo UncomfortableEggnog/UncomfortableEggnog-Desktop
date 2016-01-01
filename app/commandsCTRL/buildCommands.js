@@ -1,12 +1,12 @@
-/**
- * buildCommands
- *
- * reads the packages from file then passes package to updateCommands
- * where properties are added to commandsObj
- *
- * @param {string} variable -  description
- * @return {string}
- */
+//
+// buildCommands
+//
+// reads the packages from file then passes package to updateCommands
+// where properties are added to commandsObj
+//
+// @param {string} variable -  description
+// @return {string}
+//
 
 
 var updateCommandObj = require('./updateCommands');

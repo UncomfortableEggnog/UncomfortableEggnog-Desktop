@@ -29,19 +29,19 @@ module.exports = function (event) {
 
   } else if (matchObj.guessedCommand) {
     console.log('guessing ', matchObj.guessedCommand);
-    /*
-      passed executeShellCommand a CB because the function is async, and
-      confirm listener was recording the last few words of 'did you mean?'
-    */
+    //
+    //   passed executeShellCommand a CB because the function is async, and
+    //   confirm listener was recording the last few words of 'did you mean?'
+    //
     executeShellCommand("say did you mean" + matchObj.guessedCommand + "?", function () {
-    /*
-      By keeping this function within this scope,
-      it retains access to the commandsUtils object,
-      the matchObj and the executeShellCommand function.
-
-      we can switch the current context by binding the callback
-      to the current context
-    */
+    //
+    //   By keeping this function within this scope,
+    //   it retains access to the commandsUtils object,
+    //   the matchObj and the executeShellCommand function.
+    //
+    //   we can switch the current context by binding the callback
+    //   to the current context
+    //
       var confirmListener = listener(function (event) {
         confirmListener.pause();
         confirmListener.killTimer();

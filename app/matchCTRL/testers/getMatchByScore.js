@@ -1,13 +1,13 @@
 var phoneticsTest = require('./phoneticsTest');
 
-/**
- * getMatchByScore - reduces over an array of commands, and
- * keeps the highest scoring phrase
- *
- * @param {array} phrases - array of known commands
- * @param {string} actionPrefix - user supplied command
- * @return {string}
- */
+
+// getMatchByScore - reduces over an array of commands, and
+// keeps the highest scoring phrase
+//
+// @param {array} phrases - array of known commands
+// @param {string} actionPrefix - user supplied command
+// @return {string}
+//
 
 
 module.exports = function (phrases, actionPrefix, closeMatchThreshold) {

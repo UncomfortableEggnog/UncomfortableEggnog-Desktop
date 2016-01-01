@@ -13,7 +13,7 @@ module.exports = function (grunt) {
     },
     docco: {
       debug: {
-        src: ['electron/**/*.js'],
+        src: ['./**/*.js', '!./node_modules/**', '!./**/stylesheets/**', '!./**/dist/**'],
         options: {
           output: 'docs/'
         }
